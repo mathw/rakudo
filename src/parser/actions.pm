@@ -8,10 +8,13 @@ class Perl6::Grammar::Actions ;
 # When those are fixed and we can use the "true" Perl 6 classnames,
 # this can be removed.  (See also the C<package_def> method below.)
 our %?CLASSMAP;
-%?CLASSMAP<Object>  := 'Perl6Object';
-%?CLASSMAP<Array>   := 'Perl6Array';
-%?CLASSMAP<Hash>    := 'Perl6Hash';
-%?CLASSMAP<Pair>    := 'Perl6Pair';
+INIT {
+    our %?CLASSMAP;
+    %?CLASSMAP<Object>  := 'Perl6Object';
+    %?CLASSMAP<Array>   := 'Perl6Array';
+    %?CLASSMAP<Hash>    := 'Perl6Hash';
+    %?CLASSMAP<Pair>    := 'Perl6Pair';
+}
 
 # $?RAKUDO_HLL identifies the .HLL to use for compilation --
 # it's ultimately set by the .RAKUDO_HLL macro in F<perl6.pir> .
