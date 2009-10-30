@@ -85,7 +85,12 @@ method TOP($/) {
     }
 
     $main.hll($?RAKUDO_HLL);
-    my $?FILE := Q:PIR { %r = find_caller_lex '$?FILES' };
+    my $?FILE := Q:PIR {
+        %r = find_caller_lex '$?FILES'
+        unless null %r goto files_ok
+        %r = new ['String']
+      files_ok:
+    };
     $main.unshift(PAST::Op.new(:inline(".annotate 'file', '" ~ $?FILE ~ "'")));
     make $main;
 }

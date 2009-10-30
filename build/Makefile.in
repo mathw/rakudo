@@ -252,8 +252,8 @@ src/gen_grammar.pir: $(PARROT) $(PERL6GRAMMAR_PBC) src/parser/grammar.pg src/par
 	    --output=src/gen_grammar.pir --encoding=utf8 \
 	    src/parser/grammar.pg src/parser/grammar-oper.pg
 
-src/gen_actions.pir: $(PARROT) $(NQP_PBC) src/parser/actions.pm
-	$(PARROT) $(PARROT_ARGS) $(NQP_PBC) --output=src/gen_actions.pir \
+src/gen_actions.pir: $(PARROT) $(NQP_EXE) src/parser/actions.pm
+	$(NQP_EXE) --output=src/gen_actions.pir \
 	    --encoding=fixed_8 --target=pir src/parser/actions.pm
 
 src/gen_signature_pm.pir: $(PARROT) $(NQP_EXE) src/parser/signature.pm
