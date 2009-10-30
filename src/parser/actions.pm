@@ -2413,11 +2413,13 @@ method number($/, $key) {
 ##  NQP doesn't have assign yet, and Str is lighter-weight than Str.
 method integer($/) {
     my $str;
-    PIR q<  $P0 = find_lex '$/'   >;
-    PIR q<  $S0 = $P0             >;
-    PIR q<  $P1 = new ['Str']  >;
-    PIR q<  assign $P1, $S0       >;
-    PIR q<  store_lex '$str', $P1 >;
+    Q:PIR { 
+        $P0 = find_lex '$/'
+        $S0 = $P0
+        $P1 = new ['Str']
+        assign $P1, $S0
+        store_lex '$str', $P1
+    };
     make PAST::Val.new(
         :value( +$str ),
         :returns('Int'),
@@ -2428,11 +2430,13 @@ method integer($/) {
 
 method dec_number($/) {
     my $str;
-    PIR q<  $P0 = find_lex '$/'   >;
-    PIR q<  $S0 = $P0             >;
-    PIR q<  $P1 = new ['Str']  >;
-    PIR q<  assign $P1, $S0       >;
-    PIR q<  store_lex '$str', $P1 >;
+    Q:PIR {
+        $P0 = find_lex '$/'
+        $S0 = $P0
+        $P1 = new ['Str']
+        assign $P1, $S0
+        store_lex '$str', $P1
+    };
     make PAST::Val.new(
         :value( +$str ),
         :returns('Num'),
@@ -2459,7 +2463,7 @@ method rad_number($/) {
         $radcalc.unshift( PAST::Val.new( :value( $radix ), :node( $/ ) ) );
         make $radcalc;
     }
-    else{
+    else {
         my $return_type := 'Int';
         if $fracpart { $return_type := 'Num'; }
         make PAST::Val.new(
