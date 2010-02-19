@@ -58,6 +58,10 @@ class Rat {
         # self ~~ NaN ?? NaN !! self <=> 0;
         self < 0 ?? -1 !! ( self == 0 ?? 0 !! 1);
     }
+
+    multi method ACCEPTS($other) {
+        self == $other;
+    }
 }
 
 multi sub infix:<+>(Rat $a, Rat $b) {
